@@ -13,9 +13,17 @@
   {:fullName schema/Str
    :title    schema/Str})
 
+(schema/defschema TeacherRatingForm
+  {:teacher_id s/Int
+   :grade      s/Int
+   :comment    s/Str})
+
+; from korma
 ; symbol must be equal to the name of the SQL table it uses
 (defentity teachers)
+(defentity teacher_rating_form)
 
+; implement handler functions
 (defn get-teachers []
   (select teachers))
 
