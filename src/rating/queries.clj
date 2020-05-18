@@ -14,9 +14,9 @@
    :title    schema/Str})
 
 (schema/defschema TeacherRatingForm
-  {:teacher_id s/Int
-   :grade      s/Int
-   :comment    s/Str})
+  {:teacher_id schema/Int
+   :grade      schema/Int
+   :comment    schema/Str})
 
 ; from korma
 ; symbol must be equal to the name of the SQL table it uses

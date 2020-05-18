@@ -15,14 +15,14 @@
              :tags [{:name "api", :description "some apis"}]}}}
 
     (context "/api" []
-      ; for students
+      ; for students and admin
       (GET "/teachers" []
         (ok (qrs/get-teachers)))
       (GET "/teachers/:id" []
         :path-params [id :- schema/Int]
         (ok (qrs/get-teacher id)))
 
-      ; for admin
+      ; for admin only
       (POST "/teachers" []
         :body [teacher-data qrs/NewTeacher]
         (let [{:keys [fullName title]} teacher-data]
