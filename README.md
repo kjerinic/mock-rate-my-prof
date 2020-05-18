@@ -18,6 +18,10 @@ or
 
 `lein ring server-headless` (starts the server without opening a browser window)
 
+## Try out the API only
+
+Start the server in one of the two previously mentioned ways, go to http://localhost:3000/index.html from your browser and check out the endpoints.
+
 ## License
 
 Copyright ©  MIT License

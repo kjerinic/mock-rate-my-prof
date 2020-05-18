@@ -13,7 +13,7 @@
   {:fullName schema/Str
    :title    schema/Str})
 
-(schema/defschema TeacherRatingForm
+(schema/defschema NewTeacherRating
   {:teacher_id schema/Int
    :grade      schema/Int
    :comment    schema/Str})
@@ -34,6 +34,10 @@
 (defn add-teacher [fullName title]
   (insert teachers
           (values {:fullName fullName :title title})))
+
+(defn add-teacher-rating [teacher_id grade comment]
+  (insert teacher_rating_form
+          (values {:teacher_id teacher_id :grade grade :comment comment})))
 
 (defn delete-teacher [id]
   (delete teachers

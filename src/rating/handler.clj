@@ -21,6 +21,10 @@
       (GET "/teachers/:id" []
         :path-params [id :- schema/Int]
         (ok (qrs/get-teacher id)))
+      (POST "/teachers/rate" []
+        :body [rating-data qrs/NewTeacherRating]
+        (let [{:keys [teacher_id grade comment]} rating-data]
+          (ok (qrs/add-teacher-rating teacher_id grade comment))))
 
       ; for admin only
       (POST "/teachers" []
