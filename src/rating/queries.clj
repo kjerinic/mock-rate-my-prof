@@ -1,17 +1,19 @@
 (ns rating.queries
   (:require [rating.database :refer [db]]
             [korma.core :refer :all]
-            [schema.core :as s]))
+            [schema.core :as schema]))
 
-(s/defschema GetTeacher
-  {:id       s/Int
-   :fullName s/Str
-   :title    s/Str})
+; schemas to standardize request and response parameters
+(schema/defschema GetTeacher
+  {:id       schema/Int
+   :fullName schema/Str
+   :title    schema/Str})
 
-(s/defschema NewTeacher
-  {:fullName s/Str
-   :title    s/Str})
+(schema/defschema NewTeacher
+  {:fullName schema/Str
+   :title    schema/Str})
 
+; symbol must be equal to the name of the SQL table it uses
 (defentity teachers)
 
 (defn get-teachers []
