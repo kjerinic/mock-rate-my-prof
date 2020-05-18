@@ -1,35 +1,43 @@
 (ns rating.handler
   (:require [compojure.api.sweet :refer :all]
+            [compojure.route :as route]
             [ring.util.http-response :refer :all]
-            [schema.core :as s]))
-
-(s/defschema Pizza
-  {:name s/Str
-   (s/optional-key :description) s/Str
-   :size (s/enum :L :M :S)
-   :origin {:country (s/enum :FI :PO)
-            :city s/Str}})
+            [schema.core :as schema]
+            [rating.queries :as qrs]))
 
 (def app
   (api
     {:swagger
-     {:ui "/"
+     {:ui   "/"
       :spec "/swagger.json"
-      :data {:info {:title "Rating"
-                    :description "Compojure Api example"}
+      :data {:info {:title       "Rating"
+                    :description "Compojure API example"}
              :tags [{:name "api", :description "some apis"}]}}}
 
     (context "/api" []
-      :tags ["api"]
+      ; for students
+      (GET "/teachers" []
+        (ok (qrs/get-teachers)))
+      (GET "/teachers/:id" []
+        :path-params [id :- schema/Int]
+        (ok (qrs/get-teacher id)))
 
-      (GET "/plus" []
-        :return {:result Long}
-        :query-params [x :- Long, y :- Long]
-        :summary "adds two numbers together"
-        (ok {:result (+ x y)}))
+      ; for admin
+      (POST "/teachers" []
+        :body [teacher-data qrs/NewTeacher]
+        (let [{:keys [fullName title]} teacher-data]
+          (ok (qrs/add-teacher fullName title))))
+      (PUT "/teachers" []
+        :body [teacher-data qrs/GetTeacher]
+        (let [{:keys [id fullName title]} teacher-data]
+          (ok {:updated (qrs/update-teacher id fullName title)})))
+      (DELETE "/teachers/:id" []
+        :path-params [id :- schema/Int]
+        (ok {:deleted (qrs/delete-teacher id)}))
 
-      (POST "/echo" []
-        :return Pizza
-        :body [pizza Pizza]
-        :summary "echoes a Pizza"
-        (ok pizza)))))
+      ; non-existing endpoint
+      (route/not-found
+        (not-found {:body "No such endpoint."}))
+      )
+    )
+  )
