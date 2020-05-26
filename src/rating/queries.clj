@@ -13,6 +13,9 @@
   {:fullName schema/Str
    :title    schema/Str})
 
+(schema/defschema LoginAdmin
+  {:username schema/Str})
+
 (schema/defschema NewTeacherRating
   {:teacher_id schema/Int
    :grade      schema/Int
@@ -21,9 +24,14 @@
 ; from korma
 ; symbol must be equal to the name of the SQL table it uses
 (defentity teachers)
+(defentity admins)
 (defentity teacher_rating_form)
 
 ; implement handler functions
+(defn login-admin [username]
+  (first (select admins
+                 (where {:username username}))))
+
 (defn get-teachers []
   (select teachers))
 

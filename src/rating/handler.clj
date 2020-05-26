@@ -10,7 +10,7 @@
     {:swagger
      {:ui   "/"
       :spec "/swagger.json"
-      :data {:info {:title       "Rating"
+      :data {:info {:title       "Simplified Rate My Professor"
                     :description "Compojure API example"}
              :tags [{:name "api", :description "some apis"}]}}}
 
@@ -21,12 +21,16 @@
       (GET "/teachers/:id" []
         :path-params [id :- schema/Int]
         (ok (qrs/get-teacher id)))
-      (POST "/teachers/rate" []
+      (POST "/teachers/rating" []
         :body [rating-data qrs/NewTeacherRating]
         (let [{:keys [teacher_id grade comment]} rating-data]
           (ok (qrs/add-teacher-rating teacher_id grade comment))))
 
       ; for admin only
+      (POST "/login" []
+        :body [admin qrs/LoginAdmin]
+        (let [{:keys [username]} admin]
+          (ok (qrs/login-admin username))))
       (POST "/teachers" []
         :body [teacher-data qrs/NewTeacher]
         (let [{:keys [fullName title]} teacher-data]
@@ -41,7 +45,6 @@
 
       ; non-existing endpoint
       (route/not-found
-        (not-found {:body "No such endpoint."}))
-      )
+        (not-found {:body "No such endpoint."})))
     )
   )
