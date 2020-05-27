@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <small *ngIf="invalidLoginMsg">{{ invalidLoginMsg }}</small>
+  <form [formGroup]="loginForm">
+    <label>
+      Username:
+      <input type="text" formControlName="username">
+    </label>
+    <br>
+    <button (click)="logIn()" [disabled]="loginForm.invalid" class="btn btn-light">Log In</button>
+  </form>
+</div>
