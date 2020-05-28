@@ -23,13 +23,16 @@ export class AdminLoginComponent implements OnInit {
 
   logIn() {
     const username = this.loginForm.value.username;
-    if (this.adminService.authAdmin(username)) {
-      this.invalidLoginMsg = '';
-      // noinspection JSIgnoredPromiseFromCall
-      this.router.navigate(['teacher']);
-    } else {
-      this.invalidLoginMsg = 'Wrong username or password.';
-    }
+    this.adminService.authAdmin(username).subscribe(data => {
+      if (data) {
+        console.log(data.username);
+        this.invalidLoginMsg = '';
+        sessionStorage.setItem('username', data.username);
+        this.router.navigate(['teacher']);
+      } else {
+        this.invalidLoginMsg = 'Wrong username or password.';
+      }
+    });
   }
 
   private createFormGroup() {

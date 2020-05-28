@@ -30,6 +30,7 @@
 ; implement handler functions
 (defn login-admin [username]
   (first (select admins
+                 (fields :username)
                  (where {:username username}))))
 
 (defn get-teachers []

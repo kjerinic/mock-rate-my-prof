@@ -9,6 +9,7 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { AdminLogoutComponent } from './components/admin-logout/admin-logout.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AdminLogoutComponent } from './components/admin-logout/admin-logout.com
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
