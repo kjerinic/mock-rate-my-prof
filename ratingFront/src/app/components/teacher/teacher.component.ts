@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Teacher} from '../../models/Teacher';
+import {TeacherService} from '../../services/teacher.service';
 
 @Component({
   selector: 'app-teacher',
@@ -13,7 +14,8 @@ export class TeacherComponent implements OnInit {
   newTeacherForm: FormGroup;
 
   constructor(private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private teacherService: TeacherService) {
     this.teacher = new Teacher();
     this.newTeacherForm = this.createNewTeacherForm();
   }
@@ -29,7 +31,12 @@ export class TeacherComponent implements OnInit {
   }
 
   saveNewEvalForm() {
-    console.log(this.mapFormValueToObject(this.newTeacherForm));
+    this.teacherService.addNewTeacher(this.mapFormValueToObject(this.newTeacherForm)).subscribe(() => {
+      console.log('Saved.');
+      this.newTeacherForm.reset();
+    }, error => {
+      console.log(error);
+    });
   }
 
   mapFormValueToObject(formObject: FormGroup) {
