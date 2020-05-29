@@ -19,13 +19,15 @@ export class AdminLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.adminService.isAdminLoggedIn()) {
+      this.router.navigate(['teacher']);
+    }
   }
 
   logIn() {
     const username = this.loginForm.value.username;
     this.adminService.authAdmin(username).subscribe(data => {
       if (data) {
-        console.log(data.username);
         this.invalidLoginMsg = '';
         sessionStorage.setItem('username', data.username);
         this.router.navigate(['teacher']);

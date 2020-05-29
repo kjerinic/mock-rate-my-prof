@@ -10,6 +10,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { AdminLogoutComponent } from './components/admin-logout/admin-logout.component';
 import {HttpClientModule} from '@angular/common/http';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { TeacherRatingComponent } from './components/teacher-rating/teacher-rating.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {HttpClientModule} from '@angular/common/http';
     AdminLoginComponent,
     NavbarComponent,
     ErrorPageComponent,
-    AdminLogoutComponent
+    AdminLogoutComponent,
+    WelcomePageComponent,
+    TeacherRatingComponent
   ],
   imports: [
     BrowserModule,
