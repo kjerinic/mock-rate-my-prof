@@ -7,10 +7,12 @@ import {AdminService} from '../../services/admin.service';
   styleUrls: ['./admin-logout.component.scss']
 })
 export class AdminLogoutComponent implements OnInit {
+  logoutMsg: string;
 
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
+    this.logoutMsg = 'You are no longer logged in as admin.';
     this.adminService.logOut();
   }
 

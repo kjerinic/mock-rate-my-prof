@@ -14,7 +14,7 @@ export class AdminRouteGuardService implements CanActivate {
     if (this.adminService.isAdminLoggedIn()) {
       return true;
     } else {
-      this.router.navigate(['admin-logout']);
+      this.router.navigate(['/']);
       return false;
     }
   }
