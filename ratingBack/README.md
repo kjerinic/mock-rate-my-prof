@@ -1,4 +1,10 @@
-# Using Leiningen as the build tool
+# Clojure REST API using Leiningen
+
+The project uses Ring, Compojure and Swagger to make a "sweet API" and SQL Korma for communicating with the database.
+
+## Requirements
+
+To start the project you need to have Java installed (at least version 8) as well as Leiningen, a popular Clojure build tool.
 
 ## To start the server
 
@@ -19,3 +25,12 @@ or
 ## Try out the API only
 
 Start the server in one of the two previously mentioned ways, go to http://localhost:3000/index.html from your browser and check out the endpoints.
+
+## References
+This project was made using information from multiple tutorials and documentations, including:
+
+1. http://practicalli.github.io/clojure-webapps/
+2. https://practicalli.github.io/blog/posts/clojure-web-server-cli-tools-deps-edn/
+3. https://devcenter.heroku.com/articles/clojure-web-application
+4. http://metosin.github.io/compojure-api/doc/
+
