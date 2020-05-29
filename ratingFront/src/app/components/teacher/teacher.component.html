@@ -1,2 +1,13 @@
 <app-navbar></app-navbar>
-<p>TEACHER works!</p>
+
+<div class="container">
+  <form [formGroup]="newTeacherForm" class="form-group">
+    <label for="inputFullName"> Teacher's full name </label>
+    <input formControlName="FullName" class="input-group" id="inputFullName">
+    <label for="inputTitle"> Teacher's academic title </label>
+    <input formControlName="Title" class="input-group" id="inputTitle">
+    <button class="btn btn-block btn-dark" [disabled]="newTeacherForm.invalid" (click)="saveNewEvalForm()">
+      Save new teacher
+    </button>
+  </form>
+</div>
