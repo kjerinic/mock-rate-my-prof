@@ -1,1 +1,26 @@
-<p>teacher-rating works!</p>
+<div class="container">
+  <form [formGroup]="newRatingForm" class="form-group">
+    <div class="form-group">
+      <label for="inputTeacher">Choose a teacher to rate</label>
+      <select class="custom-select" formControlName="Teacher" id="inputTeacher">
+        <option *ngFor="let teacher of teachers" [value]=teacher>
+          {{teacher.fullName}}, {{teacher.title}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="inputGrade">Grade (1-10)</label>
+      <input formControlName="Grade" id="inputGrade" type="number" class="form-control" placeholder="1 - 10">
+    </div>
+
+    <div class="form-group">
+      <label for="inputComment">Leave a comment</label>
+      <input formControlName="Comment" id="inputComment" type="text" class="form-control" placeholder="Your comment">
+    </div>
+
+    <button class="btn btn-block btn-dark" [disabled]="newRatingForm.invalid" (click)="saveRating()">
+      Save this rating
+    </button>
+
+  </form>
+</div>

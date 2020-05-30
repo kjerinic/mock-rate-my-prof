@@ -34,8 +34,8 @@ export class TeacherComponent implements OnInit {
     });
   }
 
-  mapFormValueToObject(formObject: FormGroup) {
-    const formValue = formObject.value;
+  mapFormToObject(formGroup: FormGroup) {
+    const formValue = formGroup.value;
 
     this.teacher.fullName = formValue.FullName;
     this.teacher.title = formValue.Title;
@@ -44,7 +44,7 @@ export class TeacherComponent implements OnInit {
   }
 
   saveTeacher() {
-    this.teacherService.addNewTeacher(this.mapFormValueToObject(this.newTeacherForm)).subscribe(() => {
+    this.teacherService.addNewTeacher(this.mapFormToObject(this.newTeacherForm)).subscribe(() => {
       alert('Saved.');
       this.newTeacherForm.reset();
       this.showAllTeachers();
@@ -77,7 +77,7 @@ export class TeacherComponent implements OnInit {
   }
 
   saveEditedTeacher() {
-    this.teacherService.editTeacher(this.mapFormValueToObject(this.newTeacherForm)).subscribe(() => {
+    this.teacherService.editTeacher(this.mapFormToObject(this.newTeacherForm)).subscribe(() => {
       alert('Saved.');
       this.showAllTeachers();
       this.isInEditMode = false;
