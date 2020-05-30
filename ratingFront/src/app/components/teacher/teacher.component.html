@@ -11,8 +11,11 @@
       <input formControlName="Title" id="inputTitle" type="text" class="form-control" placeholder="dr, mr, spec">
     </div>
 
-    <button id="saveButton" class="btn btn-block btn-dark" [disabled]="newTeacherForm.invalid" (click)="saveTeacher()">
-      Save new teacher
+    <button *ngIf="!isInEditMode" class="saveButton btn btn-block btn-dark" [disabled]="newTeacherForm.invalid" (click)="saveTeacher()">
+      Create new teacher
+    </button>
+    <button *ngIf="isInEditMode" class="saveButton btn btn-block btn-dark" [disabled]="newTeacherForm.invalid" (click)="saveEditedTeacher()">
+      Save
     </button>
   </form>
 </div>

@@ -13,12 +13,14 @@ export class TeacherComponent implements OnInit {
   teacher: Teacher;
   newTeacherForm: FormGroup;
   allTeachers: Teacher[];
+  isInEditMode: boolean;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private teacherService: TeacherService) {
     this.teacher = new Teacher();
     this.allTeachers = [];
+    this.isInEditMode = false;
     this.newTeacherForm = this.createNewTeacherForm();
   }
 
@@ -60,18 +62,26 @@ export class TeacherComponent implements OnInit {
   }
 
   editTeacher(teacher: Teacher) {
-    this.teacherService.editTeacher(teacher).subscribe(() => {
+    this.isInEditMode = true;
+    this.teacher = teacher;
+    this.newTeacherForm = this.createNewTeacherForm();
+  }
+
+  deleteTeacher(teacher: Teacher) {
+    this.teacherService.deleteTeacher(teacher).subscribe(() => {
+      alert('Deleted.');
       this.showAllTeachers();
-      alert('Saved.');
     }, error => {
       console.log(error);
     });
   }
 
-  deleteTeacher(teacher: Teacher) {
-    this.teacherService.deleteTeacher(teacher).subscribe(() => {
+  saveEditedTeacher() {
+    this.teacherService.editTeacher(this.mapFormValueToObject(this.newTeacherForm)).subscribe(() => {
+      alert('Saved.');
       this.showAllTeachers();
-      alert('Deleted.');
+      this.isInEditMode = false;
+      this.newTeacherForm.reset();
     }, error => {
       console.log(error);
     });
