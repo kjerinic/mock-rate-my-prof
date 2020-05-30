@@ -56,8 +56,8 @@ CREATE TABLE `teacher_rating_form` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_idx` (`teacher_id`),
-  CONSTRAINT `id` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `id` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `teacher_rating_form` (
 
 LOCK TABLES `teacher_rating_form` WRITE;
 /*!40000 ALTER TABLE `teacher_rating_form` DISABLE KEYS */;
-INSERT INTO `teacher_rating_form` VALUES (1,3,10,'');
+INSERT INTO `teacher_rating_form` VALUES (5,4,0,'string'),(6,4,0,'string'),(7,8,8,'hnj');
 /*!40000 ALTER TABLE `teacher_rating_form` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +82,7 @@ CREATE TABLE `teachers` (
   `fullName` varchar(120) DEFAULT NULL,
   `title` varchar(120) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (3,'Jelena Jovanović','spec'),(4,'Dragan Đurić','dr'),(7,'Milica Rakić','dr'),(8,'Draga Jović','dr'),(11,'string','string'),(12,'Ana Janjic','dr'),(13,'Sanja Janjic','mr'),(14,'da','dsa');
+INSERT INTO `teachers` VALUES (4,'Dragan Đurić','dr'),(7,'Milica Rakić','spec'),(8,'Draga Jović','dr'),(25,'Ana Janjic','mr');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,6 +119,31 @@ LOCK TABLES `tokens` WRITE;
 INSERT INTO `tokens` VALUES (1,'fon');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `universities`
+--
+
+DROP TABLE IF EXISTS `universities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `universities` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(125) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `universities`
+--
+
+LOCK TABLES `universities` WRITE;
+/*!40000 ALTER TABLE `universities` DISABLE KEYS */;
+INSERT INTO `universities` VALUES (1,'Faculty of Organizational Sciences'),(2,'Faculty of Mathematics'),(3,'Faculty of Electrical Engineering');
+/*!40000 ALTER TABLE `universities` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -129,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-30 10:36:55
+-- Dump completed on 2020-05-31  0:20:51
