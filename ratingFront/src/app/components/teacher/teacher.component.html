@@ -2,12 +2,46 @@
 
 <div class="container">
   <form [formGroup]="newTeacherForm" class="form-group">
-    <label for="inputFullName"> Teacher's full name </label>
-    <input formControlName="FullName" class="input-group" id="inputFullName">
-    <label for="inputTitle"> Teacher's academic title </label>
-    <input formControlName="Title" class="input-group" id="inputTitle">
-    <button class="btn btn-block btn-dark" [disabled]="newTeacherForm.invalid" (click)="saveNewEvalForm()">
+    <div class="form-group">
+      <label for="inputFullName">Full name</label>
+      <input formControlName="FullName" id="inputFullName" type="text" class="form-control" placeholder="Pera Peric">
+    </div>
+    <div class="form-group">
+      <label for="inputTitle">Title</label>
+      <input formControlName="Title" id="inputTitle" type="text" class="form-control" placeholder="dr, mr, spec">
+    </div>
+
+    <button id="saveButton" class="btn btn-block btn-dark" [disabled]="newTeacherForm.invalid" (click)="saveTeacher()">
       Save new teacher
     </button>
   </form>
+</div>
+<hr>
+<div class="container">
+  <button class="btn btn-dark" (click)="showAllTeachers()">
+    Show all teachers
+  </button>
+</div>
+<div class="container" *ngIf="allTeachers.length">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Full name</th>
+      <th scope="col">Title</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let teacher of allTeachers">
+    <tr>
+      <td>{{ teacher.fullName }}</td>
+      <td>{{ teacher.title }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="editTeacher(teacher)">Edit</button>
+      <td>
+        <button class="btn btn-danger" (click)="deleteTeacher(teacher)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

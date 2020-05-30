@@ -19,8 +19,25 @@ export class TeacherService {
   addNewTeacher(teacher: Teacher): Observable<any> {
     return this.httpClient.post<any>(this.getAPIUrl('teachers'),
       {
-        fullName: teacher.FullName,
-        title: teacher.Title
+        fullName: teacher.fullName,
+        title: teacher.title
       });
+  }
+
+  getAllTeachers(): Observable<Teacher[]> {
+    return this.httpClient.get<Teacher[]>(this.getAPIUrl('teachers'));
+  }
+
+  editTeacher(teacher: Teacher): Observable<any> {
+    return this.httpClient.put<any>(this.getAPIUrl('teachers'),
+      {
+        id: teacher.id,
+        fullName: teacher.fullName,
+        title: teacher.title
+      });
+  }
+
+  deleteTeacher(teacher: Teacher): Observable<any> {
+    return this.httpClient.delete<any>(this.getAPIUrl('teachers/' + teacher.id));
   }
 }
