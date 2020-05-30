@@ -1,10 +1,10 @@
-# Clojure REST API using Leiningen
+# Clojure REST API using Leiningen and MySQL
 
 The project uses Ring, Compojure and Swagger to make a "sweet API" and SQL Korma for communicating with the database.
 
 ## Requirements
 
-To start the project you need to have Java installed (at least version 8) as well as Leiningen, a popular Clojure build tool.
+To start the server you need to have Java installed (at least version 8) as well as Leiningen, a popular Clojure build tool. To use the API you need to have MySQL installed as well.
 
 ## To start the server
 
@@ -25,6 +25,10 @@ or
 ## Try out the API only
 
 Start the server in one of the two previously mentioned ways, go to http://localhost:3000/index.html from your browser and check out the endpoints.
+
+## To set up the database
+
+Start MySQL on your computer and import the database.sql file from the resources folder. 
 
 ## References
 This project was made using information from multiple tutorials and documentations, including:
