@@ -3,7 +3,7 @@
     <div class="form-group">
       <label for="inputTeacher">Choose a teacher to rate</label>
       <select class="custom-select" formControlName="Teacher" id="inputTeacher">
-        <option *ngFor="let teacher of teachers" [value]=teacher>
+        <option *ngFor="let teacher of teachers" [value]="teacher.id">
           {{teacher.fullName}}, {{teacher.title}}
         </option>
       </select>

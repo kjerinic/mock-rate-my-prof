@@ -28,10 +28,10 @@ export class TeacherRatingComponent implements OnInit {
     });
   }
 
-  private mapFormToObject(formGroup: FormGroup) {
+  private mapFormToObject(formGroup: FormGroup): TeacherRating {
     const formValue = formGroup.value;
 
-    this.rating.teacher = formValue.Teacher;
+    this.rating.teacherId = formValue.Teacher;
     this.rating.grade = formValue.Grade;
     this.rating.comment = formValue.Comment;
 
@@ -40,11 +40,16 @@ export class TeacherRatingComponent implements OnInit {
 
   saveRating() {
     console.log(this.mapFormToObject(this.newRatingForm));
+    this.teacherRatingService.addNewRating(this.mapFormToObject(this.newRatingForm)).subscribe( () => {
+      alert('Saved.');
+    }, err => {
+      console.log(err);
+    });
   }
 
   private createFormGroup() {
     return this.formBuilder.group({
-      Teacher: [null, [Validators.required]],
+      Teacher: [this.rating.teacherId, [Validators.required]],
       Grade: [this.rating.grade, [Validators.required]],
       Comment: [this.rating.comment, [Validators.required]]
     });

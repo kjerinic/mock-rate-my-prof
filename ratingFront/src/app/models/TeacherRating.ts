@@ -1,7 +1,5 @@
-import {Teacher} from './Teacher';
-
 export class TeacherRating {
-  teacher: Teacher;
+  teacherId: number;
   grade: number;
   comment: string;
 }
