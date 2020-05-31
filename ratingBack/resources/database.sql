@@ -27,6 +27,7 @@ DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
+  `password` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +38,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (2,'admin');
+INSERT INTO `admins` VALUES (2,'admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +58,7 @@ CREATE TABLE `teacher_rating_form` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_idx` (`teacher_id`),
   CONSTRAINT `id` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +67,7 @@ CREATE TABLE `teacher_rating_form` (
 
 LOCK TABLES `teacher_rating_form` WRITE;
 /*!40000 ALTER TABLE `teacher_rating_form` DISABLE KEYS */;
-INSERT INTO `teacher_rating_form` VALUES (5,4,0,'string'),(6,4,0,'string'),(7,8,8,'hnj');
+INSERT INTO `teacher_rating_form` VALUES (12,36,2,'Bad.');
 /*!40000 ALTER TABLE `teacher_rating_form` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +83,7 @@ CREATE TABLE `teachers` (
   `fullName` varchar(120) DEFAULT NULL,
   `title` varchar(120) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,33 +92,8 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (4,'Dragan Đurić','dr'),(7,'Milica Rakić','spec'),(8,'Draga Jović','dr'),(25,'Ana Janjic','mr');
+INSERT INTO `teachers` VALUES (35,'Pera Peric','vanredni profesor'),(36,'Ana Janjic','redovni profesor'),(37,'Sanja Savic','docent');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tokens`
---
-
-DROP TABLE IF EXISTS `tokens`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tokens` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tokens`
---
-
-LOCK TABLES `tokens` WRITE;
-/*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (1,'fon');
-/*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -154,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-31  0:20:51
+-- Dump completed on 2020-05-31 22:30:41
