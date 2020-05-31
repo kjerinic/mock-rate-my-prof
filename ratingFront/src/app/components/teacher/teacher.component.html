@@ -8,13 +8,28 @@
     </div>
     <div class="form-group">
       <label for="inputTitle">Title</label>
-      <input formControlName="Title" id="inputTitle" type="text" class="form-control" placeholder="dr, mr, spec">
+      <select class="custom-select" formControlName="Title" id="inputTitle">
+        <option value="redovni profesor">
+          redovni profesor
+        </option>
+        <option value="vanredni profesor">
+          vanredni profesor
+        </option>
+        <option value="docent">
+          docent
+        </option>
+        <option value="asistent">
+          asistent
+        </option>
+      </select>
     </div>
 
-    <button *ngIf="!isInEditMode" class="saveButton btn btn-block btn-dark" [disabled]="newTeacherForm.invalid" (click)="saveTeacher()">
+    <button *ngIf="!isInEditMode" class="saveButton btn btn-block btn-dark" [disabled]="newTeacherForm.invalid"
+            (click)="saveTeacher()">
       Create new teacher
     </button>
-    <button *ngIf="isInEditMode" class="saveButton btn btn-block btn-dark" [disabled]="newTeacherForm.invalid" (click)="saveEditedTeacher()">
+    <button *ngIf="isInEditMode" class="saveButton btn btn-block btn-dark" [disabled]="newTeacherForm.invalid"
+            (click)="saveEditedTeacher()">
       Save
     </button>
   </form>
