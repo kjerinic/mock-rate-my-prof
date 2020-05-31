@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Teacher} from '../models/Teacher';
+import {AdminService} from './admin.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private adminService: AdminService) {
   }
 
   private getAPIUrl(fnName: string): string {
@@ -21,7 +22,7 @@ export class TeacherService {
   }
 
   addNewTeacher(teacher: Teacher): Observable<any> {
-    const params = new HttpHeaders().set('username', 'admin');
+    const params = new HttpHeaders().set('username', this.adminService.getAdminUsername());
     return this.httpClient.post<any>(this.getAPIUrl('teachers'),
       {
         fullName: teacher.fullName,
@@ -30,7 +31,7 @@ export class TeacherService {
   }
 
   editTeacher(teacher: Teacher): Observable<any> {
-    const params = new HttpHeaders().set('username', 'admin');
+    const params = new HttpHeaders().set('username', this.adminService.getAdminUsername());
     return this.httpClient.put<any>(this.getAPIUrl('teachers'),
       {
         id: teacher.id,
@@ -40,7 +41,7 @@ export class TeacherService {
   }
 
   deleteTeacher(teacher: Teacher): Observable<any> {
-    const params = new HttpHeaders().set('username', 'admin');
+    const params = new HttpHeaders().set('username', this.adminService.getAdminUsername());
     return this.httpClient.delete<any>(this.getAPIUrl('teachers/' + teacher.id), {headers: params});
   }
 }

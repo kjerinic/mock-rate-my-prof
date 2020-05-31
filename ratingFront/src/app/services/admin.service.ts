@@ -23,6 +23,10 @@ export class AdminService {
       });
   }
 
+  public getAdminUsername(): string {
+    return sessionStorage.getItem('username');
+  }
+
   isAdminLoggedIn() {
     const username = sessionStorage.getItem('username');
     return username !== null;
