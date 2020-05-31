@@ -40,20 +40,24 @@
   (first (select teachers
                  (where {:id id}))))
 
-(defn add-teacher [fullName title]
-  (insert teachers
-          (values {:fullName fullName :title title})))
-
 (defn add-teacher-rating [teacher_id grade comment]
   (insert teacher_rating_form
           (values {:teacher_id teacher_id :grade grade :comment comment})))
 
-(defn delete-teacher [id]
-  (delete teachers
-          (where {:id id})))
+; admin only
+(defn add-teacher [username fullName title]
+  (if (= username "admin")
+    (insert teachers
+            (values {:fullName fullName :title title}))))
 
-(defn update-teacher [id fullName title]
-  (update teachers
-          (set-fields {:title    title
-                       :fullName fullName})
-          (where {:id id})))
+(defn delete-teacher [username id]
+  (if (= username "admin")
+    (delete teachers
+            (where {:id id}))))
+
+(defn update-teacher [username id fullName title]
+  (if (= username "admin")
+    (update teachers
+            (set-fields {:title    title
+                         :fullName fullName})
+            (where {:id id}))))

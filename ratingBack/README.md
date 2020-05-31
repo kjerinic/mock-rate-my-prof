@@ -37,4 +37,5 @@ This project was made using information from multiple tutorials and documentatio
 2. https://practicalli.github.io/blog/posts/clojure-web-server-cli-tools-deps-edn/
 3. https://devcenter.heroku.com/articles/clojure-web-application
 4. http://metosin.github.io/compojure-api/doc/
+5. https://github.com/metosin/compojure-api/wiki/Endpoints
 

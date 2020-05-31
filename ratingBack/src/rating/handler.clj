@@ -19,7 +19,7 @@
       (context "/api" []
         ; for students and admin
         (GET "/teachers" []
-          (ok (qrs/get-teachers)))
+            (ok (qrs/get-teachers)))
         (GET "/teachers/:id" []
           :path-params [id :- schema/Int]
           (ok (qrs/get-teacher id)))
@@ -34,16 +34,19 @@
           (let [{:keys [username]} admin]
             (ok (qrs/login-admin username))))
         (POST "/teachers" []
+          :header-params [username :- schema/Str]
           :body [teacher-data qrs/NewTeacher]
           (let [{:keys [fullName title]} teacher-data]
-            (ok (qrs/add-teacher fullName title))))
+            (ok (qrs/add-teacher username fullName title))))
         (PUT "/teachers" []
+          :header-params [username :- schema/Str]
           :body [teacher-data qrs/GetTeacher]
           (let [{:keys [id fullName title]} teacher-data]
-            (ok {:updated (qrs/update-teacher id fullName title)})))
+            (ok {:updated (qrs/update-teacher username id fullName title)})))
         (DELETE "/teachers/:id" []
+          :header-params [username :- schema/Str]
           :path-params [id :- schema/Int]
-          (ok {:deleted (qrs/delete-teacher id)}))
+          (ok {:deleted (qrs/delete-teacher username id)}))
 
         ; non-existing endpoint
         (route/not-found
