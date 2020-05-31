@@ -27,6 +27,10 @@ export class AdminService {
     return sessionStorage.getItem('username');
   }
 
+  public setAdminUsername(username: string) {
+    sessionStorage.setItem('username', username);
+  }
+
   isAdminLoggedIn() {
     const username = sessionStorage.getItem('username');
     return username !== null;

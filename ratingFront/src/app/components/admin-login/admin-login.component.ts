@@ -29,7 +29,7 @@ export class AdminLoginComponent implements OnInit {
     this.adminService.authAdmin(username).subscribe(data => {
       if (data) {
         this.invalidLoginMsg = '';
-        sessionStorage.setItem('username', data.username);
+        this.adminService.setAdminUsername(data.username);
         this.router.navigate(['teacher']);
       } else {
         this.invalidLoginMsg = 'Wrong username or password.';
