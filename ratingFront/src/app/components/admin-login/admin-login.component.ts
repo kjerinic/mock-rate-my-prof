@@ -26,7 +26,8 @@ export class AdminLoginComponent implements OnInit {
 
   logIn() {
     const username = this.loginForm.value.username;
-    this.adminService.authAdmin(username).subscribe(data => {
+    const password = this.loginForm.value.password;
+    this.adminService.authAdmin(username, password).subscribe(data => {
       if (data) {
         this.invalidLoginMsg = '';
         this.adminService.setAdminUsername(data.username);
@@ -39,7 +40,8 @@ export class AdminLoginComponent implements OnInit {
 
   private createFormGroup() {
     return this.formBuilder.group({
-      username: ['', [Validators.required]]
+      username: ['', [Validators.required, Validators.pattern('(.|\\s)*\\S(.|\\s)*')]],
+      password: ['', [Validators.required, Validators.pattern('(.|\\s)*\\S(.|\\s)*')]]
     });
   }
 

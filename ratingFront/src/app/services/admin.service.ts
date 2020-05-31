@@ -16,10 +16,11 @@ export class AdminService {
     return url + fnName;
   }
 
-  authAdmin(username: string): Observable<Username> {
+  authAdmin(username: string, password: string): Observable<Username> {
     return this.httpClient.post<Username>(this.getAPIUrl('login'),
       {
-        username
+        username,
+        password
       });
   }
 

@@ -31,8 +31,8 @@
         ; for admin only
         (POST "/login" []
           :body [admin qrs/LoginAdmin]
-          (let [{:keys [username]} admin]
-            (ok (qrs/login-admin username))))
+          (let [{:keys [username password]} admin]
+            (ok (qrs/login-admin username password))))
         (POST "/teachers" []
           :header-params [username :- schema/Str]
           :body [teacher-data qrs/NewTeacher]

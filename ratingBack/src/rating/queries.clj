@@ -1,7 +1,13 @@
 (ns rating.queries
   (:require [rating.database :refer [db]]
             [korma.core :refer :all]
-            [schema.core :as schema]))
+            [schema.core :as schema])
+  (:import (java.security MessageDigest)))
+
+; for hashing the password
+(defn sha256 [string]
+  (let [digest (.digest (MessageDigest/getInstance "SHA-256") (.getBytes string "UTF-8"))]
+    (apply str (map (partial format "%02x") digest))))
 
 ; schemas to standardize request and response parameters
 (schema/defschema GetTeacher
@@ -14,7 +20,8 @@
    :title    schema/Str})
 
 (schema/defschema LoginAdmin
-  {:username schema/Str})
+  {:username schema/Str
+   :password schema/Str})
 
 (schema/defschema NewTeacherRating
   {:teacher_id schema/Int
@@ -28,10 +35,10 @@
 (defentity teacher_rating_form)
 
 ; implement handler functions
-(defn login-admin [username]
+(defn login-admin [username password]
   (first (select admins
                  (fields :username)
-                 (where {:username username}))))
+                 (where {:username username :password (sha256 password)}))))
 
 (defn get-teachers []
   (select teachers))
